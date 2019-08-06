@@ -1,11 +1,9 @@
+DOCKER_REPO ?= docker.io/
+IMAGE ?= maxbeck/tomcat-s2i
+TAG ?= latest
 
-IMAGE_NAME = s2i-tomcat
-
-.PHONY: build
 build:
-	docker build -t $(IMAGE_NAME) .
+	docker build -t "${DOCKER_REPO}$(IMAGE):$(TAG)" .
 
-.PHONY: test
-test:
-	docker build -t $(IMAGE_NAME)-candidate .
-	IMAGE_NAME=$(IMAGE_NAME)-candidate test/run
+push: build
+	docker push "${DOCKER_REPO}$(IMAGE):$(TAG)"
