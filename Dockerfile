@@ -1,5 +1,3 @@
-
-# s2i-tomcat
 FROM openshift/base-centos7
 
 EXPOSE 8080
@@ -28,8 +26,8 @@ RUN INSTALL_PKGS="tar java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
     mkdir -p /opt/s2i/destination
 
 # Add s2i customizations
-ADD ./conf/settings.xml $HOME/.m2/
-ADD ./conf/server.xml /tomcat/conf/
+ADD ./m2/settings.xml $HOME/.m2/
+ADD ./conf /tomcat/conf
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
